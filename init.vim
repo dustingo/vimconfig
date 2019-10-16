@@ -135,7 +135,7 @@ autocmd BufEnter * silent! lcd %:p:h
 noremap tx :r !figlet
 
 " Compile function
-noremap r :call CompileRunGcc()<CR>
+noremap rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 exec "w"
 if &filetype == 'c'
@@ -187,6 +187,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 " ===
@@ -274,3 +279,39 @@ let g:NERDTreeIndicatorMapCustom = {
 "== FZF
 "==
 noremap <C-p> :FZF<CR>
+
+" ===
+" === MarkdownPreview
+" ===
+let g:mkdp_auto_start = 1
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_command_for_global = 0
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_open_ip = '127.0.0.1'
+let g:mkdp_echo_preview_url = 0
+function! g:EchoUrl(url)
+	:echo a:url
+endfunction
+let g:mkdp_browserfunc = 'g:EchoUrl'
+let g:mkdp_preview_options = {
+			\ 'mkit': {},
+			\ 'katex': {},
+			\ 'uml': {},
+			\ 'maid': {},
+			\ 'disable_sync_scroll': 0,
+			\ 'sync_scroll_type': 'middle',
+			\ 'hide_yaml_meta': 1
+			\ }
+let g:mkdp_markdown_css = ''
+let g:mkdp_highlight_css = ''
+let g:mkdp_port = '8080'
+let g:mkdp_page_title = '「${name}」'
+" ===
+" === Markdown Settings
+" ===
+" Snippets
+source ~/.config/nvim/snippets.vim
+" auto spell
+autocmd BufRead,BufNewFile *.md setlocal spell
+
