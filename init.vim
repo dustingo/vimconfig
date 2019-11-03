@@ -133,7 +133,10 @@ autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
 noremap tx :r !figlet
-
+" complete "(" and so on                                                        
+inoremap ( ()<ESC>i                                                                                                                       
+inoremap [ []<ESC>i                                                             
+inoremap { {}<ESC>i                                                             
 " Compile function
 noremap rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
